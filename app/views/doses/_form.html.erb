@@ -1,0 +1,6 @@
+<!-- _form.html.erb -->
+<%= simple_form_for([cocktail, dose]) do |f| %>
+  <%= f.input :description %>
+  <%= f.association :ingredient, as: :select %>
+  <%= f.submit %>
+<% end %>
