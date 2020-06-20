@@ -1,0 +1,7 @@
+<!-- show.html.erb -->
+<h1> <%= @cocktail.name %> </h1>
+<ul>
+  <% @cocktail.doses.all.each do |dose| %>
+    <li><%= "#{dose.description} #{dose.ingredient.name}" %></li>
+  <% end %>
+</ul>
