@@ -1,13 +1,33 @@
 <!-- show.html.erb -->
-<h1> <%= @cocktail.name %> </h1>
-<ul>
-  <% @cocktail.doses.all.each do |dose| %>
-    <li>
-      <%= "#{dose.description} #{dose.ingredient.name}" %>
-      <%= link_to ('  <i class="fas fa-minus-circle"></i>  ').html_safe, dose_path(dose), method: :delete  %>
-    </li>
-  <% end %>
-  <li>
-    <%= link_to ('  <i class="fas fa-plus-circle"></i>  Add dose').html_safe, new_cocktail_dose_path(@cocktail) %>
-  </li>
-</ul>
+<div class="container">
+  <h1> <%= @cocktail.name %> </h1>
+  <div class="row">
+    <div class="col-12">
+      <h3>Recipe</h3>
+      <table class="table">
+        <tbody>
+          <thead>
+            <th>Ingredient</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </thead>
+          <% @cocktail.doses.all.each do |dose| %>
+            <tr>
+              <td>
+                <%= "#{dose.ingredient.name}" %>
+              </td>
+              <td>
+                <%= "#{dose.description}" %>
+              </td>
+              <td>
+                <%= link_to ('  <i class="fas fa-trash"></i>  ').html_safe, dose_path(dose), method: :delete  %>
+              </td>
+            </tr>
+          <% end %>
+          <td><%= link_to ('  <i class="fas fa-plus-circle"></i>  Add ingredient').html_safe, new_cocktail_dose_path(@cocktail) %></td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

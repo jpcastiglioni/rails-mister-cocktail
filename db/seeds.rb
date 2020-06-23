@@ -77,3 +77,24 @@ if negroni.save
 else
   puts 'Negroni already created!'
 end
+
+puts 'Creating Daiquiri!'
+
+daiquiri = Cocktail.new(name: 'Daiquiri')
+daiquiri_doses = [
+  { ingr: 'Light rum', desc: '1 1/2 oz' },
+  { ingr: 'Lime', desc: 'Juice of 1/2' },
+  { ingr: 'Sugar', desc: '1 tsp' }
+]
+
+if daiquiri.save
+  daiquiri_doses.each do |ingr|
+    dose = Dose.new(description: ingr[:desc])
+    dose.ingredient = Ingredient.find_by(name: ingr[:ingr])
+    dose.cocktail = daiquiri
+    dose.save!
+  end
+  puts 'Daiquiri created!'
+else
+  puts 'Daiquiri already created!'
+end

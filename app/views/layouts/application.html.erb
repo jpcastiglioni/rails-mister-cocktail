@@ -12,9 +12,7 @@
   </head>
 
   <body>
-    <div class="container">
-      <%= yield %>
-      <%=  link_to "Cocktails main", cocktails_path %>
-    </div>
+    <%= render "shared/navbar" %>
+    <%= yield %>
   </body>
 </html>
