@@ -34,6 +34,24 @@ else
   puts 'Ingredients already seeded!'
 end
 
+def seed_cocktail(cocktail, doses)
+  file = URI.open("https://source.unsplash.com/500x400/?#{cocktail.name}")
+  cocktail.photo.attach(io: file,
+                        filename: "#{cocktail.name}.png",
+                        content_type: 'image/png')
+  if cocktail.save
+    doses.each do |ingr|
+      dose = Dose.new(description: ingr[:desc])
+      dose.ingredient = Ingredient.find_by(name: ingr[:ingr])
+      dose.cocktail = cocktail
+      dose.save!
+    end
+    puts "#{cocktail.name} created!"
+  else
+    puts "#{cocktail.name} already created!"
+  end
+end
+
 puts 'Creating Mojito!'
 
 mojito = Cocktail.new(name: 'Mojito')
@@ -45,17 +63,19 @@ mojito_doses = [
   { ingr: 'Soda water', desc: '.' }
 ]
 
-if mojito.save
-  mojito_doses.each do |ingr|
-    dose = Dose.new(description: ingr[:desc])
-    dose.ingredient = Ingredient.find_by(name: ingr[:ingr])
-    dose.cocktail = mojito
-    dose.save!
-  end
-  puts 'Mojito created!'
-else
-  puts 'Mojito already created!'
-end
+seed_cocktail(mojito, mojito_doses)
+
+# if mojito.save
+#   mojito_doses.each do |ingr|
+#     dose = Dose.new(description: ingr[:desc])
+#     dose.ingredient = Ingredient.find_by(name: ingr[:ingr])
+#     dose.cocktail = mojito
+#     dose.save!
+#   end
+#   puts 'Mojito created!'
+# else
+#   puts 'Mojito already created!'
+# end
 
 puts 'Creating Negroni!'
 
@@ -66,17 +86,18 @@ negroni_doses = [
   { ingr: 'Sweet Vermouth', desc: '1 oz' }
 ]
 
-if negroni.save
-  negroni_doses.each do |ingr|
-    dose = Dose.new(description: ingr[:desc])
-    dose.ingredient = Ingredient.find_by(name: ingr[:ingr])
-    dose.cocktail = negroni
-    dose.save!
-  end
-  puts 'Negroni created!'
-else
-  puts 'Negroni already created!'
-end
+seed_cocktail(negroni, negroni_doses)
+# if negroni.save
+#   negroni_doses.each do |ingr|
+#     dose = Dose.new(description: ingr[:desc])
+#     dose.ingredient = Ingredient.find_by(name: ingr[:ingr])
+#     dose.cocktail = negroni
+#     dose.save!
+#   end
+#   puts 'Negroni created!'
+# else
+#   puts 'Negroni already created!'
+# end
 
 puts 'Creating Daiquiri!'
 
@@ -87,14 +108,16 @@ daiquiri_doses = [
   { ingr: 'Sugar', desc: '1 tsp' }
 ]
 
-if daiquiri.save
-  daiquiri_doses.each do |ingr|
-    dose = Dose.new(description: ingr[:desc])
-    dose.ingredient = Ingredient.find_by(name: ingr[:ingr])
-    dose.cocktail = daiquiri
-    dose.save!
-  end
-  puts 'Daiquiri created!'
-else
-  puts 'Daiquiri already created!'
-end
+seed_cocktail(daiquiri, daiquiri_doses)
+
+# if daiquiri.save
+#   daiquiri_doses.each do |ingr|
+#     dose = Dose.new(description: ingr[:desc])
+#     dose.ingredient = Ingredient.find_by(name: ingr[:ingr])
+#     dose.cocktail = daiquiri
+#     dose.save!
+#   end
+#   puts 'Daiquiri created!'
+# else
+#   puts 'Daiquiri already created!'
+# end
