@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # get 'cocktails/:id', to: 'cocktails#show', as: :cocktail
   # post 'cocktails', to: 'cocktails#create'
 
-  resources :cocktails, only: %i[index show new create] do
+  resources :cocktails, only: %i[index show new create destroy] do
     resources :doses, only: %i[new create]
   end
 

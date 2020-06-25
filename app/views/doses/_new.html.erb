@@ -1,0 +1,8 @@
+<!-- _new.html.erb -->
+<h3>Add a new dose</h3>
+
+<%= simple_form_for([cocktail, dose]) do |f| %>
+  <%= f.input :description %>
+  <%= f.association :ingredient, as: :select %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>

@@ -1,8 +1,8 @@
 <!-- show.html.erb -->
 <div class="container">
-  <h1> <%= @cocktail.name %> </h1>
+  <h1> <%= @cocktail.name %> <%= link_to ('  <i class="fas fa-trash"></i>  ').html_safe, cocktail_path(@cocktail), method: :delete  %></h1>
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 col-md-9">
       <h3>Recipe</h3>
       <table class="table">
         <tbody>
@@ -24,9 +24,17 @@
               </td>
             </tr>
           <% end %>
-          <td><%= link_to ('  <i class="fas fa-plus-circle"></i>  Add ingredient').html_safe, new_cocktail_dose_path(@cocktail) %></td>
+          <tr>
+            <td><%= link_to ('  <i class="fas fa-plus-circle"></i>  Add ingredient').html_safe, new_cocktail_dose_path(@cocktail) %></td>
+            <td></td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
+    </div>
+    <div class="col-12 col-md-9">
+      <%= render 'doses/new', cocktail: @cocktail, dose: @dose %>
+
     </div>
   </div>
 </div>
